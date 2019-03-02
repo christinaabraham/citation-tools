@@ -24,10 +24,13 @@ public class Citation implements Comparable<Citation> {
 		return author;
 	}
 	
-	public String setAuthor() {
+	public String setAuthor() throws NullPointerException {
 		//FORMAT: John Smith
 		// Allow middle names and/or initials
+		System.out.print("\tAuthor(s): ");
+		author = keyboard.nextLine();
 		String lastName, firstName = "";
+		
 		for(int i = author.length(); i < 0; i++) {
 			if(author.substring(i-1, i).equals(" ")) {
 				lastName = author.substring(i-1, author.length());
@@ -44,7 +47,7 @@ public class Citation implements Comparable<Citation> {
 	
 	public String setAccessedDate() {
 		// DATE FORMAT: MM/DD/YYYY || MM/YYY || YYYY 
-		System.out.print("Date Accessed: ");
+		System.out.print("\tDate Accessed: ");
 		this.dateAccessed = keyboard.nextLine();
 		
 		int spaceCount = 0;
@@ -84,13 +87,13 @@ public class Citation implements Comparable<Citation> {
 		}
 	}
 	
-	public String getPublishedDate() {
+	public String getPublishedDate() {	// Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: 8
 		return datePublished;
 	}
 	
 	public String setPublishedDate() {
 		// DATE FORMAT: MM/DD/YYYY || MM/YYY || YYYY 
-		System.out.print("Date Published: ");
+		System.out.print("\tDate Published: ");
 		this.datePublished = keyboard.nextLine();
 		
 		int spaceCount = 0;
@@ -134,7 +137,7 @@ public class Citation implements Comparable<Citation> {
 	}
 	
 	public String setURL() {
-		System.out.print("Website URL: ");
+		System.out.print("\tWebsite URL: ");
 		url = keyboard.nextLine();
 		return url + ".";
 	}
@@ -144,7 +147,7 @@ public class Citation implements Comparable<Citation> {
 	}
 	
 	public String setSourceTitle() {
-		System.out.print("Article Tite: ");
+		System.out.print("\tArticle Tite: ");
 		title = keyboard.nextLine();
 		return "\"" + title + ".\"";
 	}
@@ -154,13 +157,14 @@ public class Citation implements Comparable<Citation> {
 	}
 	
 	public String setSiteName() {
-		System.out.print("Website Name: ");
+		System.out.print("\tWebsite Name: ");
 		site = keyboard.nextLine();
 		return site;
 	}
 	
 	public int compareTo(Citation c) {
-		String order = "abcdefghijklmnopqrstuvwxyz";
-		return order.indexOf(author.substring(1)) - order.indexOf(c.getAuthor().substring(1));		
-	}
+		String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		return alpha.indexOf(author.substring(1).toUpperCase()) 
+				- alpha.indexOf(c.getAuthor().substring(1).toUpperCase());		
+	}	
 }
