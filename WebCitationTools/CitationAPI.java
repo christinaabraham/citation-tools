@@ -1,4 +1,3 @@
-
 public interface CitationAPI {
 	public void MLA();
 	public void APA();
